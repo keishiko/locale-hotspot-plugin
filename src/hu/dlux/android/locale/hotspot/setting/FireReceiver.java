@@ -109,7 +109,7 @@ public final class FireReceiver extends BroadcastReceiver
 		}
 
 		Toast.makeText(context, message + "!!!", Toast.LENGTH_LONG).show();
-		new LowLevelHotspotApi().changeHotspotState(context, true);
+		// Comment it back later: new LowLevelHotspotApi().changeHotspotState(context, true);
 		Toast.makeText(context, message + "!!! XXX", Toast.LENGTH_LONG).show();
 	}
 }
