@@ -12,13 +12,9 @@
 
 package hu.dlux.android.locale.hotspot.setting;
 
-import hu.dlux.android.locale.hotspot.Constants;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -36,81 +32,9 @@ public final class FireReceiver extends BroadcastReceiver
 	@Override
 	public void onReceive(final Context context, final Intent intent)
 	{
-		Toast.makeText(context, "!!!", 3).show();
-		Toast.makeText(context, "xxx", Toast.LENGTH_LONG).show();
-		/*
-		 * Always be sure to be strict on input parameters! A malicious third-party app could always send an empty or otherwise
-		 * malformed Intent. And since Locale applies settings in the background, the plug-in definitely shouldn't crash in the
-		 * background
-		 */
-
-		/*
-		 * Locale guarantees that the Intent action will be ACTION_FIRE_SETTING
-		 */
-		if (!com.twofortyfouram.locale.Intent.ACTION_FIRE_SETTING.equals(intent.getAction()))
-		{
-			Log.e(Constants.LOG_TAG, String.format("Received unexpected Intent action %s", intent.getAction())); //$NON-NLS-1$
-			return;
+		if (com.twofortyfouram.locale.Intent.ACTION_FIRE_SETTING.equals(intent.getAction())) {
+			boolean on = StateBundle.from(intent).isOn();
+			Toast.makeText(context, "Turning Wifi Hotspot " + (on ? "ON" : "OFF"), 3).show();
 		}
-
-		/*
-		 * This is a hack to work around a custom serializable classloader attack. This check must come before any of the Intent
-		 * extras are examined.
-		 */
-		try
-		{
-			final Bundle extras = intent.getExtras();
-
-			if (extras != null)
-			{
-				// if a custom serializable subclass exists, this will throw an exception
-				extras.containsKey(null);
-			}
-		}
-		catch (final Exception e)
-		{
-			Log.e(Constants.LOG_TAG, "Custom serializable attack detected; do not send custom Serializable subclasses to this receiver", e); //$NON-NLS-1$
-			return;
-		}
-
-		final Bundle bundle = intent.getBundleExtra(com.twofortyfouram.locale.Intent.EXTRA_BUNDLE);
-		if (bundle == null)
-		{
-			Log.e(Constants.LOG_TAG, "Received null BUNDLE"); //$NON-NLS-1$
-			return;
-		}
-
-		/*
-		 * Note: This is a hack to work around a custom serializable classloader attack via the EXTRA_BUNDLE. This check must come
-		 * before any of the Bundle extras are examined.
-		 */
-		try
-		{
-			// if a custom serializable subclass exists, this will throw an exception
-			bundle.containsKey(null);
-		}
-		catch (final Exception e)
-		{
-			Log.e(Constants.LOG_TAG, "Custom serializable attack detected; do not send custom Serializable subclasses to this receiver", e); //$NON-NLS-1$
-			return;
-		}
-
-		if (!bundle.containsKey(Constants.BUNDLE_EXTRA_STRING_MESSAGE))
-		{
-			Log.e(Constants.LOG_TAG, "Missing STATE param in Bundle"); //$NON-NLS-1$
-			return;
-		}
-
-		final String message = bundle.getString(Constants.BUNDLE_EXTRA_STRING_MESSAGE);
-
-		if (TextUtils.isEmpty(message))
-		{
-			Log.e(Constants.LOG_TAG, "BUNDLE_EXTRA_STRING_MESSAGE was empty"); //$NON-NLS-1$
-			return;
-		}
-
-		Toast.makeText(context, message + "!!!", Toast.LENGTH_LONG).show();
-		// Comment it back later: new LowLevelHotspotApi().changeHotspotState(context, true);
-		Toast.makeText(context, message + "!!! XXX", Toast.LENGTH_LONG).show();
 	}
 }
