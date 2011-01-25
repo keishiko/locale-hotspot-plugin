@@ -33,7 +33,7 @@
         android:targetSdkVersion="9" />
     <application
         android:label="@string/app_name"
-        android:icon="@drawable/icon_app"
+        android:icon="@drawable/icon"
     >
         <!--
             This Activity comes from the Locale Platform. If this plug-in does not stand alone (e.g.
@@ -43,7 +43,7 @@
         <activity
             android:name="com.twofortyfouram.locale.MarketActivity"
             android:label="@string/app_name"
-            android:icon="@drawable/icon_app"
+            android:icon="@drawable/icon"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="true"
         >
@@ -58,7 +58,7 @@
         <activity
             android:name=".setting.EditActivity"
             android:label="@string/plugin_name"
-            android:icon="@drawable/icon_plugin"
+            android:icon="@drawable/icon"
             android:exported="true"
         >
             <!-- this Intent filter allows the plug-in to be discovered by Locale -->
