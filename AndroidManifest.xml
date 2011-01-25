@@ -79,4 +79,6 @@
             </intent-filter>
         </receiver>
     </application>
+
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
 </manifest>
