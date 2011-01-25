@@ -25,7 +25,7 @@ public class LowLevelHotspotApi {
 						   boolean.class)
 			    .invoke(wifiManager, null, enable);
 		} catch (Exception e) {
-			Log.e("androidhotspot", "Cannot call: setWifiApEnabled", e);
+			Log.e(Constants.LOG_TAG, "Cannot call: setWifiApEnabled", e);
 		}
 	}
 }

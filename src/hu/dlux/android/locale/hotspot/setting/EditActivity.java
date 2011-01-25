@@ -10,8 +10,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package hu.dlux.android.locale.hotspot;
+package hu.dlux.android.locale.hotspot.setting;
 
+import hu.dlux.android.locale.hotspot.Constants;
+import hu.dlux.android.locale.hotspot.R;
+import hu.dlux.android.locale.hotspot.R.id;
+import hu.dlux.android.locale.hotspot.R.integer;
+import hu.dlux.android.locale.hotspot.R.layout;
+import hu.dlux.android.locale.hotspot.R.menu;
+import hu.dlux.android.locale.hotspot.R.string;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;

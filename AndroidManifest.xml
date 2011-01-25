@@ -56,7 +56,7 @@
         </activity>
         <!-- This is the "edit" Activity -->
         <activity
-            android:name=".EditActivity"
+            android:name=".setting.EditActivity"
             android:label="@string/plugin_name"
             android:icon="@drawable/icon_plugin"
             android:exported="true"
@@ -69,7 +69,7 @@
         </activity>
         <!-- This is the "fire" BroadcastReceiver -->
         <receiver
-            android:name=".FireReceiver"
+            android:name=".setting.FireReceiver"
             android:exported="true"
         >
             <!-- this Intent filter allows the plug-in to discovered by Locale and be fired -->
