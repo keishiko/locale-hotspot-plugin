@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.yourcompany.yoursetting;
+package hu.dlux.android.locale.hotspot;
 
 import android.app.Activity;
 import android.app.AlertDialog;

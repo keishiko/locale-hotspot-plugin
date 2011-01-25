@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.yourcompany.yoursetting;
+package hu.dlux.android.locale.hotspot;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -106,6 +106,6 @@ public final class FireReceiver extends BroadcastReceiver
 			return;
 		}
 
-		Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+		Toast.makeText(context, message + "!!!", Toast.LENGTH_LONG).show();
 	}
 }

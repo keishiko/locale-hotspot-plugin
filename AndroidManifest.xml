@@ -20,7 +20,7 @@
     -->
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yourcompany.yoursetting"
+    package="hu.dlux.android.locale.hotspot"
     android:versionCode="1"
     android:versionName="1.0"
     android:installLocation="internalOnly"
