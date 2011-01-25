@@ -1,8 +1,5 @@
 syntax: glob
-target
-syntax: glob
 bin
-syntax: glob
+gen
 .settings
-syntax: glob
 local.properties
