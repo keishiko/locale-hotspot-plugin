@@ -83,7 +83,7 @@ public class EditActivity extends Activity {
 
 		// Disable "Help" for now.
 		menu.findItem(R.id.twofortyfouram_locale_menu_help).setVisible(false);
-		return true;
+		return onCreateOptionsMenu(menu);
 	}
 	
 	@Override
@@ -97,7 +97,7 @@ public class EditActivity extends Activity {
 			finish();
 			return true;
 		}
-		return super.onMenuItemSelected(featureId, item);
+		return super.onOptionsItemSelected(item);
 	}
 	
 	private void prepareResultForFinish() {

@@ -36,6 +36,8 @@ public final class FireReceiver extends BroadcastReceiver
 	@Override
 	public void onReceive(final Context context, final Intent intent)
 	{
+		Toast.makeText(context, "!!!", 3).show();
+		Toast.makeText(context, "xxx", Toast.LENGTH_LONG).show();
 		/*
 		 * Always be sure to be strict on input parameters! A malicious third-party app could always send an empty or otherwise
 		 * malformed Intent. And since Locale applies settings in the background, the plug-in definitely shouldn't crash in the
