@@ -13,7 +13,6 @@
 package hu.dlux.android.locale.hotspot.setting;
 
 import hu.dlux.android.locale.hotspot.Constants;
-import hu.dlux.android.locale.hotspot.LowLevelHotspotApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
