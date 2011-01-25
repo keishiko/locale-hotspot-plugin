@@ -15,35 +15,9 @@ package hu.dlux.android.locale.hotspot;
 /**
  * Class of constants used by this <i>Locale</i> plug-in.
  */
-public final class Constants
-{
-	/**
-	 * Private constructor prevents instantiation
-	 *
-	 * @throws UnsupportedOperationException because this class cannot be instantiated.
-	 */
-	private Constants()
-	{
-		throw new UnsupportedOperationException(String.format("%s(): This class is non-instantiable", this.getClass().getSimpleName())); //$NON-NLS-1$
-	}
+public final class Constants {
+	private Constants() {}
 
-	/**
-	 * Log tag for logcat messages
-	 */
-	public static final String LOG_TAG = "Toast"; //$NON-NLS-1$
-
-	/**
-	 * Type: {@code boolean}
-	 * <p>
-	 * SharedPreference key for retrieving a boolean as to whether the license has been agreed to
-	 */
-	public static final String PREFERENCE_BOOLEAN_IS_LICENSE_AGREED = "IS_LICENSE_AGREED"; //$NON-NLS-1$
-
-	/**
-	 * Type: {@code String}
-	 * <p>
-	 * Maps to a {@code String} in the store-and-forward {@code Bundle} {@link com.twofortyfouram.locale.Intent#EXTRA_BUNDLE}
-	 */
-	public static final String BUNDLE_EXTRA_STRING_MESSAGE = "com.yourcompany.yourapp.extra.MESSAGE"; //$NON-NLS-1$
-
+	// Tag for Logging.
+	public static final String TAG = "Toast";
 }

@@ -22,13 +22,6 @@ import android.widget.Toast;
  */
 public final class FireReceiver extends BroadcastReceiver
 {
-
-	/**
-	 * @param context {@inheritDoc}.
-	 * @param intent the incoming {@link com.twofortyfouram.locale.Intent#ACTION_FIRE_SETTING} {@code Intent}. This should always
-	 *            contain the store-and-forward {@link com.twofortyfouram.locale.Intent#EXTRA_BUNDLE} that was saved by
-	 *            {@link EditActivity} and later broadcast by <i>Locale</i>.
-	 */
 	@Override
 	public void onReceive(final Context context, final Intent intent)
 	{

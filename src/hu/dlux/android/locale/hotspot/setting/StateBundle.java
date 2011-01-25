@@ -3,6 +3,11 @@ package hu.dlux.android.locale.hotspot.setting;
 import android.content.Intent;
 import android.os.Bundle;
 
+/**
+ * Bundle object to store the hotspot setting state. This is automatically passed by Locale.
+ *  
+ * @author dlux
+ */
 public class StateBundle {
 	private static final String KEY = "on";
 	private boolean on;
