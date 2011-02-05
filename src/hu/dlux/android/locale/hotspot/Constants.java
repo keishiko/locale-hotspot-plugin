@@ -20,4 +20,7 @@ public final class Constants {
 
 	// Tag for Logging.
 	public static final String TAG = "Toast";
+	
+	// Help URL:
+	public static final String HELP_URL = "https://sites.google.com/site/localehotspotplugin/help";
 }

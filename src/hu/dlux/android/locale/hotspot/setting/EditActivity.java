@@ -1,15 +1,19 @@
 package hu.dlux.android.locale.hotspot.setting;
 
+import hu.dlux.android.locale.hotspot.Constants;
 import hu.dlux.android.locale.hotspot.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.twofortyfouram.locale.BreadCrumber;
@@ -50,11 +54,20 @@ public class EditActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.twofortyfouram_locale_help_save_dontsave, menu);
 
-		// Disable "Help" for now.
-		menu.findItem(R.id.twofortyfouram_locale_menu_help).setVisible(false);
-
 		// Boilerplate from the Locale example application:
 		final PackageManager manager = getPackageManager();
+
+		final MenuItem helpItem = menu.findItem(R.id.twofortyfouram_locale_menu_help);
+		final CharSequence helpString = SharedResources.getTextResource(manager, getCallingPackage(),
+				SharedResources.STRING_MENU_HELP);
+		final Drawable helpIcon = SharedResources.getDrawableResource(manager, getCallingPackage(),
+				SharedResources.DRAWABLE_MENU_HELP);
+		if (helpString != null) {
+			helpItem.setTitle(helpString);
+		}
+		if (helpIcon != null) {
+			helpItem.setIcon(helpIcon);
+		}
 
 		final MenuItem dontSaveItem = menu.findItem(R.id.twofortyfouram_locale_menu_dontsave);
 		final CharSequence dontSaveTitle = SharedResources.getTextResource(manager, getCallingPackage(),
@@ -80,12 +93,22 @@ public class EditActivity extends Activity {
 			saveItem.setIcon(saveIcon);
 		}
 
-		return onCreateOptionsMenu(menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.twofortyfouram_locale_menu_help:
+			try {
+				startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(Constants.HELP_URL)));
+			}
+			catch (final Exception e) {
+				Toast.makeText(getApplicationContext(),
+					com.twofortyfouram.locale.platform.R.string.twofortyfouram_locale_application_not_available,
+						Toast.LENGTH_LONG).show();
+			}
+			return true;
 		case R.id.twofortyfouram_locale_menu_save:
 			finish();
 			return true;
