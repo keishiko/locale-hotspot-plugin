@@ -1,15 +1,34 @@
+/*
+ * Copyright 2011 Balazs Szabo (dLux) <http://www.dlux.hu>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package hu.dlux.android.locale.hotspot.setting;
 
 import hu.dlux.android.locale.hotspot.Constants;
 import hu.dlux.android.locale.hotspot.R;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -22,6 +41,11 @@ import com.twofortyfouram.locale.SharedResources;
 public class EditActivity extends Activity {
 
 	private boolean isCancelled = false;
+	
+	// Dialog ID-s.
+	private static final int DIALOG_LICENSE = 0;
+	
+	private EULAHandler eulaHandler = new EULAHandler();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -137,5 +161,96 @@ public class EditActivity extends Activity {
 	public void finish() {
 		prepareResultForFinish();
 		super.finish();
+	}
+	
+	@Override
+	protected void onResume() {
+		eulaHandler.onResume();
+		super.onResume();
+	}
+	
+	@Override
+	protected void onPause() {
+		eulaHandler.onPause();
+		super.onPause();
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dialog = eulaHandler.onCreateDialog(id);
+		if (dialog != null) {
+			return dialog;
+		}
+		return super.onCreateDialog(id);
+	}
+
+	/**
+	 * Private inner class to encapsulate the logic to handle the EULA dialog.
+	 * The logic is copied from the 'Toast' example code.
+	 */
+	private class EULAHandler {
+		
+		private AsyncTask<Void, Void, Boolean> prefReadTask;
+
+		public void onResume() {
+			prefReadTask = new AsyncTask<Void, Void, Boolean>() {
+
+				@Override
+				protected Boolean doInBackground(Void... params) {
+					return getPreferences(MODE_PRIVATE).getBoolean(Constants.PREF_LICENSE_AGREED, false);
+				}
+
+				@Override
+				protected void onPostExecute(Boolean result) {
+					if (!result) {
+						showDialog(DIALOG_LICENSE);
+					}
+				}
+			};
+			
+			prefReadTask.execute();
+		}
+
+		public void onPause() {
+			prefReadTask.cancel(true);
+		}
+
+		public Dialog onCreateDialog(int id) {
+			// We handle only the license dialog.
+			if (id != DIALOG_LICENSE) {
+				return null;
+			}
+			final AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
+			builder.setTitle(R.string.license_title);
+			builder.setMessage(R.string.license_message);
+			builder.setNegativeButton(R.string.license_disagree, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					isCancelled = true;
+					finish();
+				}
+			});
+			builder.setPositiveButton(R.string.license_agree, new DialogInterface.OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					final SharedPreferences.Editor editor =
+						getPreferences(MODE_PRIVATE).edit().putBoolean(Constants.PREF_LICENSE_AGREED, true);
+					try {
+						SharedPreferences.Editor.class.getMethod("apply").invoke(editor); //$NON-NLS-1$
+					}
+					catch (final Exception e) {
+						editor.commit();
+					}
+				}
+			});
+			builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					isCancelled = true;
+					finish();
+				}
+			});
+			return builder.create();
+		}
 	}
 }
