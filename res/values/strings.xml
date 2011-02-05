@@ -14,7 +14,7 @@
 -->
 <resources>
     <string name="app_name">Locale Wifi Hotspot Plugin</string>
-	<string name="setting_name">Wi-Fi Hotspot</string>
-    <string name="plugin_name">Toast</string>
+	<string name="setting_name">Wifi Hotspot</string>
+    <string name="plugin_name">Wifi Hotspot Plugin</string>
     <string name="message_hint">Scheduled Toast</string>
 </resources>

@@ -12,6 +12,7 @@
 
 package hu.dlux.android.locale.hotspot.setting;
 
+import hu.dlux.android.locale.hotspot.LowLevelHotspotApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +28,8 @@ public final class FireReceiver extends BroadcastReceiver
 	{
 		if (com.twofortyfouram.locale.Intent.ACTION_FIRE_SETTING.equals(intent.getAction())) {
 			boolean on = StateBundle.from(intent).isOn();
-			Toast.makeText(context, "Turning Wifi Hotspot " + (on ? "ON" : "OFF"), 3).show();
+			// Toast.makeText(context, "Turning Wifi Hotspot " + (on ? "ON" : "OFF"), 3).show();
+			new LowLevelHotspotApi(context).changeHotspotState(on);
 		}
 	}
 }

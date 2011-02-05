@@ -22,5 +22,5 @@ public final class Constants {
 	public static final String TAG = "Toast";
 	
 	// Help URL:
-	public static final String HELP_URL = "https://sites.google.com/site/localehotspotplugin/help";
+	public static final String HELP_URL = "https://sites.google.com/site/localehotspotplugin/help?tmpl=/system/app/templates/print/";
 }
