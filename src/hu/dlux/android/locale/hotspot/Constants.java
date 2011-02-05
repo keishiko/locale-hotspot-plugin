@@ -19,8 +19,9 @@ public final class Constants {
 	private Constants() {}
 
 	// Tag for Logging.
-	public static final String TAG = "Toast";
+	public static final String TAG = "LocaleWiFiHostpotPlugin";
 	
 	// Help URL:
-	public static final String HELP_URL = "https://sites.google.com/site/localehotspotplugin/help?tmpl=/system/app/templates/print/";
+	public static final String HELP_URL =
+		"https://sites.google.com/site/localehotspotplugin/help?tmpl=/system/app/templates/print/";
 }
