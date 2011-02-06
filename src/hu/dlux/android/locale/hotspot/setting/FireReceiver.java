@@ -19,7 +19,6 @@ import hu.dlux.android.locale.hotspot.LowLevelHotspotApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 /**
  * This is the "fire" {@code BroadcastReceiver} for a <i>Locale</i> plug-in setting.
