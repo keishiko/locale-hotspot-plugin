@@ -3,3 +3,6 @@ bin
 gen
 .settings
 local.properties
+
+syntax: regexp
+^target$
